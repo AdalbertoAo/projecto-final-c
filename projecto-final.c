@@ -36,17 +36,25 @@ int totalEquipes = 0;
 /*--------------------------------*/
 
 /*      TRABALHANDO COM FICHEIRO      */
+
 // Criar Ficheiro
 void criarFicheiro() {
-    FILE *ficheiro;
-    ficheiro = fopen("base_de_Dados.txt", "w");
-    if (ficheiro == NULL) {
-        printf("Erro na Abertura do ficheiro");
-        fclose(ficheiro);
+    FILE *file;
+    file = fopen("base_de_Dados.txt", "w");
+    if (file == NULL) {
+        printf("Erro na Abertura do file");
+        fclose(file);
         exit(1);
     } else {
-        printf("Ficheiro aberto com sucesso");
+        printf("file aberto com sucesso");
     }
+}
+
+void escreverFicheiro(jogador j){
+    FILE *file;
+    file = fopen("base_de_Dados.txt", "a");
+    fprintf(file, "%d;%s;%d;%d;%s\n", j.id, j.nomeJogador, j.idade, j.numeroCamisa, j.posicao);
+    fclose(file);
 }
 
 /*----------------------------------------------*/
@@ -95,13 +103,14 @@ int main() {
 
                 if (cadastrar_jogador(j)) {
                     printf("Cadastro feito com sucesso\n");
+                        
                 } else {
                     printf("Erro no cadastro\n");
                 }
                 break;
 
             case 2:
-                // Listar equipes
+          
                 break;
 
             case 3:
@@ -135,7 +144,9 @@ int main() {
 
 bool cadastrar_jogador(jogador j) {
     j.id = totalJogadores + 1;
+     escreverFicheiro(j);
     v_jogador[totalJogadores] = j;
-    totalJogadores++;
+    totalJogadores++; 
+   
     return true;
 }
