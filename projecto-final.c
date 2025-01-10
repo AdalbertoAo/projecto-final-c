@@ -40,7 +40,7 @@ int totalEquipes = 0;
 // Criar Ficheiro
 void criarFicheiro() {
     FILE *file;
-    file = fopen("base_de_Dados.txt", "w");
+    file = fopen("base_de_Dados.txt", "a");
     if (file == NULL) {
         printf("Erro na Abertura do file");
         fclose(file);
@@ -49,20 +49,57 @@ void criarFicheiro() {
         printf("file aberto com sucesso");
     }
 }
-
+// Escrever no ficheiro
 void escreverFicheiro(jogador j){
     FILE *file;
+    if (file == NULL) {
+    printf("Erro ao abrir o ficheiro\n");
+    exit(1); // Encerra o programa em caso de erro
+}
     file = fopen("base_de_Dados.txt", "a");
     fprintf(file, "%d;%s;%d;%d;%s\n", j.id, j.nomeJogador, j.idade, j.numeroCamisa, j.posicao);
     fclose(file);
 }
 
+// carregar o ficheiro
+
+void carregarFicheiro(){
+    jogador j;
+    FILE * file;
+    file = fopen ("base_de_Dados.txt", "r");
+    if (file == NULL) {
+    printf("Erro ao abrir o ficheiro\n");
+    exit(1);
+    }
+    char linha[1000]; //vetor que vai armazenar temporariamente os valores da linha lida
+    while (fgets(linha, sizeof(linha), file) != NULL) {
+    // Processa a linha lida
+     // Limpar o buffer para evitar problemas com fgets e scanf
+        fflush(stdin);  // Limpa o buffer de entrada
+
+    printf("Linha lida: %s", linha);
+
+    // reparte os valores da linha nas suas respectivas variaveis
+    sscanf(linha, "%d;%[^;];%d;%d;%[^;\n]", &j.id, j.nomeJogador, &j.idade, &j.numeroCamisa, j.posicao);
+    //armazena tudo no vetor em causa
+    v_jogador[totalJogadores] = j;
+    totalJogadores++;
+
+    }
+fclose(file);
+
+}
 /*----------------------------------------------*/
 
 /*      TODAS AS FUNCOES        */
 bool cadastrar_jogador(jogador j);
+void listarJogadores();
+/*----------------------------------------------*/
+
 
 int main() {
+    criarFicheiro();
+    carregarFicheiro();
     jogador j;
     printf("\n SEJA BEM-VINDO AO GIRABOLA \n ");
     int opcao;
@@ -110,7 +147,7 @@ int main() {
                 break;
 
             case 2:
-          
+          listarJogadores ();
                 break;
 
             case 3:
@@ -149,4 +186,18 @@ bool cadastrar_jogador(jogador j) {
     totalJogadores++; 
    
     return true;
+}
+
+ //LISTAR CLIENTES
+void listarJogadores (){
+		jogador j;
+	for(int i =0; i < totalJogadores; i++) {
+		j = v_jogador[i];
+		printf("________DADOS PESSOAIS_________________ \n"); 
+		printf("Codigo: %d \n", j.id);
+		printf("Nome: %s \n", j.nomeJogador); 
+		printf("Telefone: %d \n", j.idade); 
+		printf("Identificao: %d \n", j.numeroCamisa); 
+		printf("Morada: %s \n\n", j.posicao); 
+	}	
 }
