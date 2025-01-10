@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include<string.h>
 
+#define TAM 1000
+
 /*      Criando os Registos     */
 struct EQUIPE {
     int id;
@@ -25,6 +27,13 @@ struct JOGADOR {
 typedef struct JOGADOR jogador;
 typedef struct EQUIPE equipe;
 
+
+/*      Variáveis Globais       */
+int totalJogadores = 0;
+equipe v_equipes[TAM];
+jogador v_jogador[TAM];
+int totalEquipes = 0;
+/*--------------------------------*/
 
 /*      TRABALHANDO COM FICHEIRO      */
 
