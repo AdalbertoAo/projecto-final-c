@@ -1,0 +1,8 @@
+1;adalberto silvestre;21;12;meio campista
+2;joao paulo;17;54;goleiro
+3;uka ukanda;34;22;defesa
+4;brau;23;44;defesa
+5;joao nico;21;12;meio campista
+6;adam ssd;22;22;ejeje
+7;sdfgh;21;44;xcvbnm
+8;kjhgfds gf;32;34;meio
