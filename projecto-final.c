@@ -30,6 +30,19 @@ struct EQUIPE {
 };
 
 typedef struct EQUIPE equipe;
+struct PARTIDAS {
+    int id;
+    int idEquipes[1000];
+    int idCampeonato[1000];
+    char equipeA[50];
+    char equipeB[50];
+    int dataPartida;
+    int num_gools;
+    char placar_final[20];
+    
+    
+};
+typedef struct PARTIDAS partidas;
 
 /*      Variáveis Globais       */
 int totalJogadores = 0;
@@ -67,7 +80,6 @@ void criarFicheiro() {
 void escreverFicheiro(){
     fileEquipes = fopen("BD_equipes.txt", "w");
     fileJogadores = fopen("BD_jogadores.txt", "w");
-
     if (fileEquipes != NULL) {
         printf("Database Equipes is open \n");
         if (fileJogadores != NULL)
@@ -83,32 +95,26 @@ void escreverFicheiro(){
         fclose(fileEquipes);
         exit(1);
     }
-
     for (int i = 0; i < totalJogadores; i++)
     {
         jogador j = v_jogador[i];
         fprintf(fileJogadores, "%d;%d;%s;%d;%d;%s;%d\n",j.id, j.idEquipe, j.nomeJogador, j.idade, j.numeroCamisa, j.posicao, j.status);
-       
     }
      fclose(fileJogadores);
         printf("Database dos jogadores foi escrita com sucesso\n");
     for (int i = 0; i < totalEquipes; i++)
     {
         equipe e = v_equipes[i];
-        fprintf(fileEquipes, "%d;%s;%s;%d;%s;%d\n",e.id, e.nomeEquipe, e.cidade, e.dataFundacao, e.nomeTreinador, e.jogadores);
-        
+        fprintf(fileEquipes, "%d;%s;%s;%d;%s;%d\n",e.id, e.nomeEquipe, e.cidade, e.dataFundacao, e.nomeTreinador, e.jogadores);   
     }
     fclose(fileEquipes);
     printf("Database das equipes foi escrita com sucesso\n");
-    
 }
 
 // carregar o ficheiro
-
 void carregarFicheiro(){
     jogador j;
     equipe e;
-
     fileEquipes = fopen("BD_equipes.txt", "r");
     fileJogadores = fopen("BD_jogadores.txt", "r");
     if (fileEquipes != NULL) {
@@ -124,27 +130,22 @@ void carregarFicheiro(){
         printf("Aviso: Database equipes não encontrado. Criando novo...\n");
             return;
     }
-
-    char linhaJogador[1000]; // vetor que armazena temporariamente os valores do Database jogador em linha
-    char linhaEquipe[1000]; // vetor que armazena temporariamente os valores do Database equipe em linha
-   
-
+        char linhaJogador[1000]; // vetor que armazena temporariamente os valores do Database jogador em linha
+        char linhaEquipe[1000]; // vetor que armazena temporariamente os valores do Database equipe em linha
     while (fgets(linhaJogador, sizeof(linhaJogador), fileJogadores) != NULL) {
     // reparte os valores da linhaJogador nas suas respectivas variaveis
     sscanf(linhaJogador, "%d;%d;%[^;];%d;%d;%[^;];%d\n", &j.id,&j.idEquipe, j.nomeJogador, &j.idade, &j.numeroCamisa, j.posicao, &j.status);
     //armazena tudo no vetor em causa
     v_jogador[totalJogadores++] = j; 
     }
-fclose(fileJogadores);
-
+        fclose(fileJogadores);
     while (fgets(linhaEquipe, sizeof(linhaEquipe), fileEquipes) != NULL) {
          // reparte os valores da linhaEquipe nas suas respectivas variaveis
     sscanf(linhaEquipe, "%d;%[^;];%[^;];%d;%[^;];%d\n",&e.id, e.nomeEquipe, &e.cidade, &e.dataFundacao, e.nomeTreinador, &e.jogadores);
     //armazena tudo no vetor em causa
-    v_equipes[totalEquipes++] = e;
-      
+    v_equipes[totalEquipes++] = e; 
     }
-fclose(fileEquipes);
+        fclose(fileEquipes);
 
 }
 /*----------------------------------------------*/
@@ -182,8 +183,6 @@ int buscarJogadores(int id) {
 
 /*---------------------------------------------*/
 
-
-
 /*          SubMenus           */
 void menuEquipes(){
     system("clear");
@@ -197,7 +196,6 @@ void menuEquipes(){
         printf(" Opcao: ");
         scanf("%d", &opcao);
         getchar();
-
         switch (opcao)
         {
         case 1:
@@ -205,27 +203,20 @@ void menuEquipes(){
            printf("Nome da Equipa: ");
             fgets(e.nomeEquipe, 30, stdin);
             e.nomeEquipe[strcspn(e.nomeEquipe, "\n")] = '\0'; 
-            
             printf("Cidade da equipa: ");
             fgets(e.cidade, 30, stdin);
             e.cidade[strcspn(e.cidade, "\n")] = '\0'; 
-
             printf("Ano de Fundacao ");
             scanf("%d", &e.dataFundacao);
-            getchar();
-            
+            getchar(); 
             printf("Nome do treinador: ");
             fgets(e.nomeTreinador, 30, stdin);
             e.nomeTreinador[strcspn(e.nomeTreinador, "\n")] = '\0'; 
-
             if (cadastrar_equipes(e)) {
-                    sleep(3);
-                    system("clear");
-                    printf("Cadastro feito com sucesso\n");
-                        
-                } else {
-                    printf("Erro no cadastro\n");
-                }
+                sleep(3);
+                system("clear");
+                printf("Cadastro feito com sucesso\n");   
+                } else printf("Erro no cadastro\n");
             break;
 
             case 2:
@@ -239,12 +230,10 @@ void menuEquipes(){
                     printf("Digite o id da equipe em causa: \n");
                         scanf("%d", &idE); 
                         getchar();   
-                 
-                    printf("\n-----------PESQUISANDO JOGADOR---------\n");
-                     printf("Digite o id do jogador em causa: \n");
+                printf("\n-----------PESQUISANDO JOGADOR---------\n");
+                    printf("Digite o id do jogador em causa: \n");
                         scanf("%d", &idJ);  
-                        getchar();
-                        
+                        getchar();    
                   if(adicionarJogador(idE, idJ)){
                     printf("cadastrado comsucesso");
                   }else printf("deu pau");
@@ -254,11 +243,9 @@ void menuEquipes(){
             system("clear");
            printf("voltando para o menu anterior");
             break;
-
         }
     }while(opcao != 4);
 }
-
 void menuJogadores(){
     system("clear");
     jogador j;
@@ -270,7 +257,6 @@ void menuJogadores(){
         printf(" Opcao: ");
         scanf("%d", &opcao);
         getchar();
-
         switch (opcao)
         {
         case 1:
@@ -280,33 +266,25 @@ void menuJogadores(){
                 fgets(j.nomeJogador, sizeof(j.nomeJogador), stdin);
                 j.nomeJogador[strcspn(j.nomeJogador, "\n")] = '\0'; // Remove o '\n' capturado pelo fgets
 
-                do {
-                    printf("2. Idade: ");
+            do {
+                printf("2. Idade: ");
                     scanf("%d", &j.idade);
-                    if (j.idade < 16 || j.idade > 40)
-                        printf("Apenas jogadores com idades entre 16 e 40 podem ser cadastrados\n");
+                if (j.idade < 16 || j.idade > 40)
+                printf("Apenas jogadores com idades entre 16 e 40 podem ser cadastrados\n");
                 } while (j.idade < 16 || j.idade > 40);
-
-                printf("3. Numero da camisa: ");
+            printf("3. Numero da camisa: ");
                 scanf("%d", &j.numeroCamisa);
                 getchar(); // Limpa o '\n' deixado pelo scanf
-
-                printf("4. Posição: ");
+            printf("4. Posição: ");
                 fgets(j.posicao, sizeof(j.posicao), stdin);
                 j.posicao[strcspn(j.posicao, "\n")] = '\0'; // Remove o '\n'
-
-                if (cadastrar_jogador(j)) {
-                    sleep(3);
-                    system("clear");
-                    printf("Cadastro feito com sucesso\n");
-                        
-                } else {
-                    printf("Erro no cadastro\n");
-                }
-                
-                
+            if (cadastrar_jogador(j)) {
+                sleep(3);
+                system("clear");
+                printf("Cadastro feito com sucesso\n");    
+            } else printf("Erro no cadastro\n");
+            
             break;
-
             case 2:
             system("clear");
             listarJogadores();
@@ -315,9 +293,7 @@ void menuJogadores(){
 
             case 3:
             system("clear");
-            
             break;
-
         }
     }while(opcao != 3);
 }
@@ -457,7 +433,6 @@ void listarJogadores (){
 
 //EQUIPES
 void listarEquipes (){
-
 	for (int i = 0; i < totalEquipes; i++) {
         equipe e = v_equipes[i];
         printf("________DADOS PESSOAIS DE EQUIPES_________________\n");
@@ -467,7 +442,6 @@ void listarEquipes (){
         printf("ano da fundacao: %d \n", e.dataFundacao);
         printf("nome do tecnico: %s \n", e.nomeTreinador);
         if(e.jogadores != 0) printf("total de jogadores actualmente: %d \n", e.jogadores);
-
     }
 }
 
@@ -503,7 +477,6 @@ bool adicionarJogador(int idE, int idJ){
     }
                     return false;
 }
-
 
 bool actualizarStatus(jogador j, equipe e, int indiceE, int indiceJ){
    e.jogadores = e.jogadores + 1;
