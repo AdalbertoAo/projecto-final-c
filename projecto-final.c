@@ -308,6 +308,7 @@ bool registrarGol(int idJogador, equipe e);
 bool finalizarPartida(int idPartida, int golsEquipeA, int golsEquipeB, int* jogadoresGolA, int* jogadoresGolB);
 bool adicionarJogador(int idE, int idJ);
 bool adicionarEquipeCampeonato(int idCampeonato, int idEquipe);
+bool registrarCampeoes(int indiceC, int campeao, int viceCampeao, int terceiroLugar);
 void listarJogadores();
 void listarEquipes ();
 void listarCampeonatos();
@@ -478,7 +479,8 @@ void menuCampeonatos() {
         printf(" 2- Listar campeonatos \n");
         printf(" 3- Listar Equipes de um campeonato\n");
         printf(" 4- Adicionar Equipes ao campeonato\n");
-        printf(" 5- Voltar\n");
+        printf(" 5- Finalizar Campeonato\n");
+        printf(" 6- Voltar\n");
         printf(" Opcao: ");
         scanf("%d", &opcao);
         getchar();
@@ -551,10 +553,36 @@ void menuCampeonatos() {
                 }
             case 5:
                 system("clear");
-                break;
+                int indC, indiceC, campeao, viceCampeao, terceiroLugar;
+
+                listarCampeonatos();
+                printf("Digite o ID do campeonato que deseja finalizar: ");
+                scanf("%d", &indC);
+
+                indiceC = buscarCampeonato(indC);
+                if (indiceC == -1) {
+                    printf("Campeonato não encontrado!\n");
+                    break; // Saída do programa
+                }
+
+                // Solicitar IDs das equipes campeã, vice-campeã e terceira colocada
+                printf("Digite o ID da equipe campeã: ");
+                scanf("%d", &campeao);
+                printf("Digite o ID da equipe vice-campeã: ");
+                scanf("%d", &viceCampeao);
+                printf("Digite o ID da equipe em terceiro lugar: ");
+                scanf("%d", &terceiroLugar);
+
+                if (!registrarCampeoes(indC, campeao, viceCampeao, terceiroLugar)) {
+                    printf("Erro ao finalizar o campeonato\n");
+                }
+
+            break;
+            case 6:
+            system("clear");
             break;
         }
-    } while (opcao != 5);
+    } while (opcao != 6);
 }
 void menuPartidas() {
     int opcao;
@@ -828,10 +856,10 @@ void listarCampeonatos() {
         printf("Status: %s\n", c.status ? "Ativo" : "Inativo");
         printf("Total de Equipes: %d\n", c.totalEquipes);
         
-        if (c.status) {
+       
             printf("Campeão: %d | Vice-Campeão: %d | 3º Lugar: %d\n", 
                    c.campeao, c.viceCampeao, c.terceiroLugar);
-        }
+        
         printf("=====================================\n");
     }
 }
@@ -1016,3 +1044,39 @@ bool finalizarPartida(int idPartida, int golsEquipeA, int golsEquipeB, int* joga
 
     return true;
 }
+
+
+bool registrarCampeoes(int indiceC, int campeao, int viceCampeao, int terceiroLugar) {
+    // Verificar se o índice é válido
+    if (indiceC += -1) {
+        printf("Índice do campeonato inválido!\n");
+        return false;
+    }
+
+    // Verificar se as equipes existem
+    if (buscarEquipe(campeao) == -1) {
+        printf("ID do campeão não existe!\n");
+        return false;
+    }
+
+    if (buscarEquipe(viceCampeao) == -1) {
+        printf("ID do vice-campeão não existe!\n");
+        return false;
+    }
+
+    if (buscarEquipe(terceiroLugar) == -1) {
+        printf("ID do terceiro lugar não existe!\n");
+        return false;
+    }
+
+    // Atualizar diretamente o campeonato no vetor
+    v_campeonatos[indiceC].campeao = campeao;
+    v_campeonatos[indiceC].viceCampeao = viceCampeao;
+    v_campeonatos[indiceC].terceiroLugar = terceiroLugar;
+    v_campeonatos[indiceC].status = false; // Finalizar o campeonato
+
+    printf("Campeões registrados com sucesso!\n");
+    return true;
+}
+
+
