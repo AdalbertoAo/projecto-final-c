@@ -314,6 +314,11 @@ void listarEquipes ();
 void listarCampeonatos();
 void listarPartidas();
 void listarEquipesDoCampeonato(int idCampeonato);
+void listarCampeonatosComVencedores();
+void calcularMediaIdadePorEquipe();
+void listarArtilheirosPorCampeonato();
+void consultarGolsPorJogador();
+
 /*----------------------------------------------*/
 
 /*            BUSCAS           */
@@ -687,7 +692,41 @@ void menuPartidas() {
         }
     } while (opcao != 4);
 }
+void menuEstatisticas(){
+     int opcaoEstatisticas;
+                do {
+                    printf("\n 1- Listar campeonatos e vencedores \n");
+                    printf(" 2- Média de idade por equipe \n");
+                    printf(" 3- Listar artilheiros por campeonato \n");
+                    printf(" 4- Consultar gols por jogador \n");
+                    printf(" 5- Voltar \n");
+                    printf(" Opcao: ");
+                    scanf("%d", &opcaoEstatisticas);
+                    getchar();
 
+                    switch (opcaoEstatisticas) {
+                        case 1:
+                            listarCampeonatosComVencedores();
+                            break;
+
+                        case 2:
+                            calcularMediaIdadePorEquipe();
+                            break;
+
+                        case 3:
+                            listarArtilheirosPorCampeonato();
+                            break;
+
+                        case 4:
+                            consultarGolsPorJogador();
+                            break;
+
+                        case 5:
+                            system("clear");
+                            break;
+                    }
+                } while (opcaoEstatisticas != 5);
+}
 /*=============================================*/
 int main() {
     criarFicheiro();
@@ -699,7 +738,7 @@ int main() {
         printf(" 2- Equipes \n");
         printf(" 3- Campeonatos \n");
         printf(" 4- Partidas \n");
-        // printf(" 5-  \n");
+        printf(" 5- Estatísticas \n");
         // printf(" 6-  \n");
         // printf(" 7-  \n");
         // printf(" 8-   \n");
@@ -727,20 +766,9 @@ int main() {
                 break;
 
             case 5:
-                // Outro caso
+               menuEstatisticas();
                 break;
 
-            case 6:
-                // Outro caso
-                break;
-
-            case 7:
-                // Outro caso
-                break;
-
-            case 8:
-                // Outro caso
-                break;
         }
     } while (opcao != 9);
 
@@ -1079,4 +1107,148 @@ bool registrarCampeoes(int indiceC, int campeao, int viceCampeao, int terceiroLu
     return true;
 }
 
+
+/*     FUNCOES DE ESTATISTICAS       */
+void listarCampeonatosComVencedores() {
+    if (totalCampeonatos == 0) {
+        printf("Não há campeonatos cadastrados.\n");
+        return;
+    }
+
+    for (int i = 0; i < totalCampeonatos; i++) {
+        campeonato c = v_campeonatos[i];
+        
+        printf("=====================================\n");
+        printf("ID do Campeonato: %d\n", c.id);
+        printf("Nome do Campeonato: %s\n", c.nome);
+        printf("Ano de Realização: %d\n", c.ano);
+        printf("Status: %s\n", c.status ? "Ativo" : "Inativo");
+        printf("Total de Equipes: %d\n", c.totalEquipes);
+        
+        if (c.status == false) { // Campeonato finalizado
+            int indiceCampeao = buscarEquipe(c.campeao);
+            int indiceVice = buscarEquipe(c.viceCampeao);
+            int indiceTerceiro = buscarEquipe(c.terceiroLugar);
+
+            if (indiceCampeao != -1) {
+                printf("Campeão: %s\n", v_equipes[indiceCampeao].nomeEquipe);
+            } else {
+                printf("Campeão: N/A\n");
+            }
+
+            if (indiceVice != -1) {
+                printf("Vice-Campeão: %s\n", v_equipes[indiceVice].nomeEquipe);
+            } else {
+                printf("Vice-Campeão: N/A\n");
+            }
+
+            if (indiceTerceiro != -1) {
+                printf("3º Lugar: %s\n", v_equipes[indiceTerceiro].nomeEquipe);
+            } else {
+                printf("3º Lugar: N/A\n");
+            }
+        }
+        printf("=====================================\n");
+    }
+}
+
+void calcularMediaIdadePorEquipe() {
+    if (totalEquipes == 0) {
+        printf("Não há equipes cadastradas.\n");
+        return;
+    }
+
+    for (int i = 0; i < totalEquipes; i++) {
+        equipe e = v_equipes[i];
+        int somaIdades = 0;
+        int totalJogadoresEquipe = 0;
+
+        for (int j = 0; j < totalJogadores; j++) {
+            if (v_jogador[j].idEquipe == e.id) {
+                somaIdades += v_jogador[j].idade;
+                totalJogadoresEquipe++;
+            }
+        }
+
+        if (totalJogadoresEquipe > 0) {
+            float mediaIdade = (float)somaIdades / totalJogadoresEquipe;
+            printf("Equipe: %s | Média de Idade: %.2f anos\n", e.nomeEquipe, mediaIdade);
+        } else {
+            printf("Equipe: %s | Nenhum jogador cadastrado.\n", e.nomeEquipe);
+        }
+    }
+}
+
+void listarArtilheirosPorCampeonato() {
+    if (totalCampeonatos == 0) {
+        printf("Não há campeonatos cadastrados.\n");
+        return;
+    }
+
+    for (int i = 0; i < totalCampeonatos; i++) {
+        campeonato c = v_campeonatos[i];
+        printf("Campeonato: %s\n", c.nome);
+
+        // Vetor para armazenar os gols de cada jogador no campeonato
+        int golsPorJogador[totalJogadores];
+        for (int j = 0; j < totalJogadores; j++) {
+            golsPorJogador[j] = 0;
+        }
+
+        // Contar gols de cada jogador no campeonato
+        for (int j = 0; j < totalPartidas; j++) {
+            partida p = v_partidas[j];
+            if (p.idCampeonato == c.id) {
+                for (int k = 0; k < p.totalGolsA; k++) {
+                    int idJogador = p.jogadoresGolA[k];
+                    golsPorJogador[idJogador - 1]++;
+                }
+                for (int k = 0; k < p.totalGolsB; k++) {
+                    int idJogador = p.jogadoresGolB[k];
+                    golsPorJogador[idJogador - 1]++;
+                }
+            }
+        }
+
+        // Encontrar o jogador com mais gols
+        int maxGols = 0;
+        int idArtilheiro = -1;
+
+        for (int j = 0; j < totalJogadores; j++) {
+            if (golsPorJogador[j] > maxGols) {
+                maxGols = golsPorJogador[j];
+                idArtilheiro = j + 1; // +1 porque os IDs começam em 1
+            }
+        }
+
+        if (idArtilheiro != -1) {
+            jogador artilheiro = v_jogador[idArtilheiro - 1];
+            printf("Artilheiro: %s | Gols: %d\n", artilheiro.nomeJogador, maxGols);
+        } else {
+            printf("Nenhum gol registrado neste campeonato.\n");
+        }
+        printf("----------------------------\n");
+    }
+}
+
+void consultarGolsPorJogador() {
+    if (totalJogadores == 0) {
+        printf("Não há jogadores cadastrados.\n");
+        return;
+    }
+
+    int idJogador;
+    printf("Digite o ID do jogador: ");
+    scanf("%d", &idJogador);
+
+    int indiceJogador = buscarJogadores(idJogador);
+    if (indiceJogador == -1) {
+        printf("Jogador não encontrado.\n");
+        return;
+    }
+
+    jogador j = v_jogador[indiceJogador];
+    printf("Jogador: %s\n", j.nomeJogador);
+    printf("Total de Gols: %d\n", j.gols);
+}
 

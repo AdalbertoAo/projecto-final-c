@@ -1,4 +1,4 @@
 1;1 da gosto;luanda;1998;pedro gonsalves;1
-2;Barcelona;Barcelona;1997;Ansiflic;0
+2;Barcelona;Barcelona;1997;Ansiflic;1
 3;Rela Madrid;Madrid;1999;Carlo Ancelotti;0
 4;Paris Sna german;Paris;1899;Joaozinho;0
