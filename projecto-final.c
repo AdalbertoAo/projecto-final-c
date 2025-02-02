@@ -89,7 +89,7 @@ void criarFicheiro() {
     fileEquipes = fopen("BD_equipes.txt", "a");
     fileJogadores = fopen("BD_jogadores.txt", "a");
     fileCampeonatos = fopen("BD_campeonatos.txt", "a");
-    filePartidas = fopen("BD_partidas.txt", "a");  // Criação do arquivo de partidas
+    filePartidas = fopen("BD_partidas.txt", "a"); 
 
     if (fileEquipes != NULL) {
         printf("Database Equipes is open \n");
@@ -98,7 +98,7 @@ void criarFicheiro() {
             if (fileCampeonatos != NULL) {
                 printf("Database campeonatos is open \n");
                 if (filePartidas != NULL) {
-                    printf("Database partidas is open \n");  // Confirmação de abertura do arquivo de partidas
+                    printf("Database partidas is open \n"); 
                 } else {
                     printf("Error opening Database partidas\n");
                     fclose(filePartidas);
@@ -126,7 +126,7 @@ void escreverFicheiro() {
     fileEquipes = fopen("BD_equipes.txt", "w");
     fileJogadores = fopen("BD_jogadores.txt", "w");
     fileCampeonatos = fopen("BD_campeonatos.txt", "w");
-    filePartidas = fopen("BD_partidas.txt", "w");  // Abertura do arquivo de partidas
+    filePartidas = fopen("BD_partidas.txt", "w");
 
     if (fileEquipes == NULL || fileJogadores == NULL || fileCampeonatos == NULL || filePartidas == NULL) {
         printf("Erro ao abrir um dos arquivos.\n");
@@ -168,7 +168,7 @@ void escreverFicheiro() {
     }
     fclose(fileCampeonatos);
     
-  // Escrever a partida no arquivo
+  // Escrever partida
 for (int i = 0; i < totalPartidas; i++) {
     partida p = v_partidas[i];
 
@@ -192,7 +192,6 @@ for (int i = 0; i < totalPartidas; i++) {
         }
     }
 
-    // Finalizar linha
     fprintf(filePartidas, "\n");
 fclose(filePartidas);
 }
@@ -208,7 +207,7 @@ void carregarFicheiro() {
     fileEquipes = fopen("BD_equipes.txt", "r");
     fileJogadores = fopen("BD_jogadores.txt", "r");
     fileCampeonatos = fopen("BD_campeonatos.txt", "r");
-    filePartidas = fopen("BD_partidas.txt", "r");  // Abertura do arquivo de partidas
+    filePartidas = fopen("BD_partidas.txt", "r");
 
     if (fileEquipes == NULL || fileJogadores == NULL || fileCampeonatos == NULL || filePartidas == NULL) {
         printf("Erro ao carregar um dos arquivos.\n");
@@ -265,7 +264,7 @@ void carregarFicheiro() {
 
     while (fgets(linhaPartida, sizeof(linhaPartida), filePartidas) != NULL) {
         int statusTemp;
-        char jogadoresA[100], jogadoresB[100];  // Strings temporárias para armazenar os IDs dos jogadores
+        char jogadoresA[100], jogadoresB[100];
 
         // Leitura dos dados da partida
         sscanf(linhaPartida, "%d;%d;%d;%d;%[^;];%d;%d;%d;%[^;];%[^\n]", 
@@ -289,8 +288,6 @@ void carregarFicheiro() {
             p.jogadoresGolB[j++] = atoi(tokenB);
             tokenB = strtok(NULL, ",");
         }
-
-        // Armazenar a partida carregada
         v_partidas[totalPartidas++] = p;
     }
 
@@ -298,7 +295,7 @@ void carregarFicheiro() {
 }
 /*----------------------------------------------*/
 
-/*      PROTOTIPOS D TODAS AS FUNCOES        */
+/*      PROTOTIPOS DE TODAS AS FUNCOES        */
 bool cadastrar_jogador(jogador j);
 bool cadastrar_equipes(equipe e);
 bool cadastrar_campeonatos(campeonato c);
@@ -329,7 +326,7 @@ int buscarEquipe(int id) {
             return i;
         }
     }
-    return -1; // Retorna -1 apenas se não encontrar nenhuma equipe
+    return -1;
 }
 int buscarJogadores(int id) {
     for (int i = 0; i < totalJogadores; i++) {
@@ -338,7 +335,7 @@ int buscarJogadores(int id) {
             return i;
         }
     }
-    return -1; // Retorna -1 apenas se não encontrar nenhum jogador
+    return -1;
 }
 int buscarCampeonato(int id) {
     for (int i = 0; i < totalCampeonatos; i++) {
@@ -347,7 +344,7 @@ int buscarCampeonato(int id) {
             return i;
         }
     }
-    return -1; // Retorna -1 apenas se não encontrar nenhum jogador
+    return -1;
 }
 int buscarPartida(int id) {
     for (int i = 0; i < totalPartidas; i++) {
@@ -356,7 +353,7 @@ int buscarPartida(int id) {
             return i;
         }
     }
-    return -1; // Retorna -1 apenas se não encontrar nenhum jogador
+    return -1;
 }
 
 /*---------------------------------------------*/
@@ -452,10 +449,10 @@ void menuJogadores(){
                 } while (j.idade < 16 || j.idade > 40);
             printf("3. Numero da camisa: ");
                 scanf("%d", &j.numeroCamisa);
-                getchar(); // Limpa o '\n' deixado pelo scanf
+                getchar();
             printf("4. Posição: ");
                 fgets(j.posicao, sizeof(j.posicao), stdin);
-                j.posicao[strcspn(j.posicao, "\n")] = '\0'; // Remove o '\n'
+                j.posicao[strcspn(j.posicao, "\n")] = '\0';
             if (cadastrar_jogador(j)) {
                 sleep(3);
                 system("clear");
@@ -477,7 +474,7 @@ void menuJogadores(){
 }
 void menuCampeonatos() {
     int opcao;
-    campeonato c; // Variável para armazenar o campeonato que será cadastrado
+    campeonato c;
 
     do {
         printf("\n 1- Cadastrar campeonatos \n");
@@ -496,12 +493,12 @@ void menuCampeonatos() {
                 printf("\n========= Cadastrar Campeonato =========\n");
                 printf("Nome do Campeonato: ");
                 fgets(c.nome, sizeof(c.nome), stdin);
-                c.nome[strcspn(c.nome, "\n")] = '\0'; // Remover \n do fgets
+                c.nome[strcspn(c.nome, "\n")] = '\0';
 
                 do {
                     printf("Ano de Realização: ");
                     scanf("%d", &c.ano);
-                    getchar(); // Limpar buffer do teclado
+                    getchar();
                     if (c.ano < 2025 || c.ano > 2030) {
                         printf("Ano inválido! Digite um valor entre 2025 e 2030.\n");
                     }
@@ -540,14 +537,12 @@ void menuCampeonatos() {
                 system("clear");
                 printf("Digite o ID do campeonato ao qual deseja adicionar uma equipe: \n");
                     scanf("%d", &idCampeonato);
-                    getchar(); // Limpa buffer
-                    // Exibir equipes disponíveis
+                    getchar();
                 printf("\nEquipes cadastradas:\n");
                 for (int i = 0; i < totalEquipes; i++) {
                     printf("ID: %d | Nome: %s\n", v_equipes[i].id, v_equipes[i].nomeEquipe);
                 }
 
-                // Escolher a equipe
                 printf("\nDigite o ID da equipe que deseja adicionar: \n");
                     scanf("%d", &idEquipe);
                     getchar();
@@ -567,10 +562,9 @@ void menuCampeonatos() {
                 indiceC = buscarCampeonato(indC);
                 if (indiceC == -1) {
                     printf("Campeonato não encontrado!\n");
-                    break; // Saída do programa
+                    break;
                 }
 
-                // Solicitar IDs das equipes campeã, vice-campeã e terceira colocada
                 printf("Digite o ID da equipe campeã: ");
                 scanf("%d", &campeao);
                 printf("Digite o ID da equipe vice-campeã: ");
@@ -609,9 +603,7 @@ void menuPartidas() {
                 printf("\n========= Cadastrar Partida =========\n");
                 printf("Digite o ID do campeonato: ");
                 scanf("%d", &idC);
-                getchar();  // Limpar buffer
-
-                // Buscar o campeonato pelo ID
+                getchar(); 
                 indiceC = buscarCampeonato(idC);
                 if (indiceC != -1) {
                     campeonato c = v_campeonatos[indiceC];
@@ -621,17 +613,15 @@ void menuPartidas() {
 
                     printf("\nDigite o ID da equipe A: ");
                     scanf("%d", &p.equipesSelecionadas[0]);
-                    getchar();  // Limpar buffer
+                    getchar(); 
 
                     printf("Digite o ID da equipe B: ");
                     scanf("%d", &p.equipesSelecionadas[1]);
-                    getchar();  // Limpar buffer
+                    getchar(); 
 
                     printf("Digite a data da partida (DD/MM/AAAA): ");
                     fgets(p.data, sizeof(p.data), stdin);
-                    p.data[strcspn(p.data, "\n")] = '\0'; // Remover \n do fgets
-
-                    // Cadastrar a partida no campeonato
+                    p.data[strcspn(p.data, "\n")] = '\0'; 
                     if (cadastrar_partidas(p, c)) {
                         printf("Partida cadastrada com sucesso!\n");
                     } else {
@@ -641,8 +631,7 @@ void menuPartidas() {
                     printf("Campeonato não encontrado!\n");
                 }
             break;
-
-
+		
             case 2:
                 system("clear");
                  listarPartidas();
@@ -657,7 +646,6 @@ void menuPartidas() {
                 scanf("%d", &idPartida);
                 getchar();  
 
-                // Solicitar o placar da equipe A e os jogadores que marcaram
                 printf("Digite o placar da equipe A: ");
                 scanf("%d", &golsEquipeA);
                 getchar();
@@ -667,7 +655,6 @@ void menuPartidas() {
                     getchar();
                 }
 
-                // Solicitar o placar da equipe B e os jogadores que marcaram
                 printf("Digite o placar da equipe B: ");
                 scanf("%d", &golsEquipeB);
                 getchar();
@@ -677,7 +664,6 @@ void menuPartidas() {
                     getchar();
                 }
 
-                // Finalizar a partida passando os parâmetros coletados
                 if (finalizarPartida(idPartida, golsEquipeA, golsEquipeB, jogadoresGolA, jogadoresGolB)) {
                     printf("Partida finalizada com sucesso!\n");
                 } else {
@@ -739,13 +725,10 @@ int main() {
         printf(" 3- Campeonatos \n");
         printf(" 4- Partidas \n");
         printf(" 5- Estatísticas \n");
-        // printf(" 6-  \n");
-        // printf(" 7-  \n");
-        // printf(" 8-   \n");
-        printf(" 9- Terminar  \n");
+        printf(" 6- Terminar  \n");
         printf(" Opcao: ");
         scanf("%d", &opcao);
-        getchar(); // Limpa o '\n' deixado pelo scanf
+        getchar();
 
         switch (opcao) {
             case 1:
@@ -770,7 +753,7 @@ int main() {
                 break;
 
         }
-    } while (opcao != 9);
+    } while (opcao != 6);
 
  escreverFicheiro();
     return 0;
@@ -801,7 +784,7 @@ bool cadastrar_campeonatos(campeonato c) {
     c.campeao = 0;
     c.viceCampeao = 0;
     c.terceiroLugar = 0;
-    c.status = false;  // GARANTE QUE O STATUS COMEÇA COMO INATIVO (0)
+    c.status = false;
 
     v_campeonatos[totalCampeonatos] = c;
     totalCampeonatos++;
@@ -810,11 +793,11 @@ bool cadastrar_campeonatos(campeonato c) {
 }
 
 bool cadastrar_partidas(partida p, campeonato c) {
-    p.id = totalPartidas + 1; // Atribuir ID único para a partida
-    p.idCampeonato = c.id; // Associar a partida ao campeonato
-    p.status = false; // Partida ainda não finalizada
-    v_partidas[totalPartidas] = p; // Armazenar a partida no vetor
-    totalPartidas++; // Incrementar o contador de partidas
+    p.id = totalPartidas + 1;
+    p.idCampeonato = c.id;
+    p.status = false;
+    v_partidas[totalPartidas] = p;
+    totalPartidas++; 
     return true;
 }
 
@@ -897,12 +880,10 @@ void listarPartidas() {
     int encontrado = 0;
 
     for (int i = 0; i < totalPartidas; i++) {
-        // Buscando o índice da equipe A e equipe B
         partida p = v_partidas[i];
         int indiceEquipeA = buscarEquipe(p.equipesSelecionadas[0]);
         int indiceEquipeB = buscarEquipe(p.equipesSelecionadas[1]);
-
-        // Verificando se os índices são válidos
+	    
         if (indiceEquipeA != -1 && indiceEquipeB != -1) {
             equipe eA = v_equipes[indiceEquipeA];
             equipe eB = v_equipes[indiceEquipeB];
@@ -927,14 +908,12 @@ void listarPartidas() {
 void listarEquipesDoCampeonato(int idCampeonato) {
       int indiceC = -1;
 
-    // Busca o campeonato pelo ID usando a função buscarCampeonato
     indiceC = buscarCampeonato(idCampeonato);
 
     if (indiceC != -1) {
         campeonato c = v_campeonatos[indiceC];
         printf("Equipes no Campeonato %s (%d):\n", c.nome, idCampeonato);
-    
-        // Exibe todas as equipes que fazem parte desse campeonato
+
         for (int i = 0; i < c.totalEquipes; i++) {
             int indiceE = c.equipesParticipantes[i] -1;
             equipe e = v_equipes[indiceE];
@@ -954,8 +933,8 @@ bool adicionarJogador(int idE, int idJ){
     equipe e = v_equipes[indiceE];
     if (e.id == idE && e.jogadores < 30){
         printf("Nome da Equipe: %s; \n N de vagas: %d vagas\n", e.nomeEquipe, (30 - e.jogadores));
-        // sleep(2);
-        // system("clear");
+        sleep(2);
+        system("clear");
         indiceJ = buscarJogadores(idJ);
         jogador j = v_jogador[indiceJ];
         if(j.id == idJ && j.status != true){
@@ -1008,7 +987,6 @@ bool adicionarEquipeCampeonato(int idCampeonato, int idEquipe) {
         return false;
     }
 
-    // Verificar se a equipe já está no campeonato
     for (int i = 0; i < c->totalEquipes; i++) {
         if (c->equipesParticipantes[i] == idEquipe) {
             printf("Esta equipe já está cadastrada neste campeonato!\n");
@@ -1016,11 +994,9 @@ bool adicionarEquipeCampeonato(int idCampeonato, int idEquipe) {
         }
     }
 
-    // Adicionar equipe
     c->equipesParticipantes[c->totalEquipes] = idEquipe;
     c->totalEquipes++;
 
-    // Atualizar status do campeonato
     if (c->totalEquipes >= 4) {
         c->status = true;
         printf("O campeonato agora está ATIVO!\n");
@@ -1038,36 +1014,33 @@ bool finalizarPartida(int idPartida, int golsEquipeA, int golsEquipeB, int* joga
         return false;
     }
 
-    partida *p = &v_partidas[indiceP]; // Obtém a referência para a partida
+    partida *p = &v_partidas[indiceP];
 
     if (p->status == true) {
         printf("Esta partida já foi finalizada!\n");
         return false;
     }
 
-    // Atualizando o placar da partida
     p->totalGolsA = golsEquipeA;
     p->totalGolsB = golsEquipeB;
-    p->status = true; // Marcar a partida como finalizada
+    p->status = true;
 
-    // Registrar os gols para a equipe A
     for (int i = 0; i < golsEquipeA; i++) {
         int indiceA = buscarEquipe(p->equipesSelecionadas[0]);
         equipe e = v_equipes[indiceA];
         if (!registrarGol(jogadoresGolA[i], e)) {
             return false;
         }
-        p->jogadoresGolA[i] = jogadoresGolA[i]; // Salvar ID do jogador que marcou
+        p->jogadoresGolA[i] = jogadoresGolA[i];
     }
 
-    // Registrar os gols para a equipe B
     for (int i = 0; i < golsEquipeB; i++) {
         int indiceB = buscarEquipe(p->equipesSelecionadas[1]);
         equipe e = v_equipes[indiceB];
         if (!registrarGol(jogadoresGolB[i], e)) {
             return false;
         }
-        p->jogadoresGolB[i] = jogadoresGolB[i]; // Salvar ID do jogador que marcou
+        p->jogadoresGolB[i] = jogadoresGolB[i];
     }
 
     return true;
@@ -1075,13 +1048,11 @@ bool finalizarPartida(int idPartida, int golsEquipeA, int golsEquipeB, int* joga
 
 
 bool registrarCampeoes(int indiceC, int campeao, int viceCampeao, int terceiroLugar) {
-    // Verificar se o índice é válido
     if (indiceC += -1) {
         printf("Índice do campeonato inválido!\n");
         return false;
     }
 
-    // Verificar se as equipes existem
     if (buscarEquipe(campeao) == -1) {
         printf("ID do campeão não existe!\n");
         return false;
@@ -1097,11 +1068,10 @@ bool registrarCampeoes(int indiceC, int campeao, int viceCampeao, int terceiroLu
         return false;
     }
 
-    // Atualizar diretamente o campeonato no vetor
     v_campeonatos[indiceC].campeao = campeao;
     v_campeonatos[indiceC].viceCampeao = viceCampeao;
     v_campeonatos[indiceC].terceiroLugar = terceiroLugar;
-    v_campeonatos[indiceC].status = false; // Finalizar o campeonato
+    v_campeonatos[indiceC].status = false;
 
     printf("Campeões registrados com sucesso!\n");
     return true;
@@ -1189,13 +1159,11 @@ void listarArtilheirosPorCampeonato() {
         campeonato c = v_campeonatos[i];
         printf("Campeonato: %s\n", c.nome);
 
-        // Vetor para armazenar os gols de cada jogador no campeonato
         int golsPorJogador[totalJogadores];
         for (int j = 0; j < totalJogadores; j++) {
             golsPorJogador[j] = 0;
         }
 
-        // Contar gols de cada jogador no campeonato
         for (int j = 0; j < totalPartidas; j++) {
             partida p = v_partidas[j];
             if (p.idCampeonato == c.id) {
@@ -1210,14 +1178,13 @@ void listarArtilheirosPorCampeonato() {
             }
         }
 
-        // Encontrar o jogador com mais gols
         int maxGols = 0;
         int idArtilheiro = -1;
 
         for (int j = 0; j < totalJogadores; j++) {
             if (golsPorJogador[j] > maxGols) {
                 maxGols = golsPorJogador[j];
-                idArtilheiro = j + 1; // +1 porque os IDs começam em 1
+                idArtilheiro = j + 1;
             }
         }
 
