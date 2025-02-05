@@ -1,8 +1,8 @@
 # 📌 Sistema de Gestão da Federação Angola de Futebol (FAF)
-![Code Scrolling GIF](https://media.giphy.com/media/l0MYEqEzwMWFCg8rm/giphy.gif)
-
 
 Bem-vindo ao **Sistema de Gestão da FAF**! ⚽🏆 Este projeto tem como objetivo informatizar o registro e gerenciamento de informações sobre equipes de futebol, jogadores, campeonatos e estatísticas. 
+
+![Code Scrolling GIF](https://i.gifer.com/g0Aa.gif)
 
 ---
 
