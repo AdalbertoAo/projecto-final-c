@@ -3,7 +3,7 @@
 Bem-vindo ao **Sistema de Gestão da FAF**! ⚽🏆 Este projeto tem como objetivo informatizar o registro e gerenciamento de informações sobre equipes de futebol, jogadores, campeonatos e estatísticas. 
 
 <div align="center">
-  <img src="https://i.gifer.com/6Vz.gif" alt="Ankara Messi" />
+  <img src="https://i.gifer.com/7JaH.gif" alt="Ankara Messi" />
 </div>
 
 ---
