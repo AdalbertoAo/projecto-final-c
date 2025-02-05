@@ -1,6 +1,22 @@
 # 📌 Sistema de Gestão da Federação Angola de Futebol (FAF)
+![Welcome GIF](https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif)
+![C Programming GIF](https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif)
 
 Bem-vindo ao **Sistema de Gestão da FAF**! ⚽🏆 Este projeto tem como objetivo informatizar o registro e gerenciamento de informações sobre equipes de futebol, jogadores, campeonatos e estatísticas. 
+
+---
+
+## 📜 Menu de Navegação
+
+🔹 [Funcionalidades](#-funcionalidades)
+🔹 [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+🔹 [Como Clonar o Projeto](#-como-clonar-o-projeto)
+🔹 [Como Executar o Projeto](#-como-executar-o-projeto)
+🔹 [Prazo de Entrega](#-prazo-de-entrega)
+🔹 [Critérios de Avaliação](#-critérios-de-avaliação)
+🔹 [Contato e Redes Sociais](#-contato-e-redes-sociais)
+
+---
 
 ## 📋 Funcionalidades
 
@@ -88,3 +104,32 @@ gcc -o sistema_faf main.c
 ```
 
 ---
+
+## 📆 Prazo de Entrega
+
+A entrega está prevista para a penúltima semana do semestre, junto com uma apresentação prática do sistema. 🎤💡
+
+---
+
+## 🏅 Critérios de Avaliação
+
+- ✅ Funcionalidade e cumprimento dos requisitos.
+- ✅ Estrutura e organização do código.
+- ✅ Correção e eficiência do programa.
+- ✅ Qualidade da interface do usuário.
+- ✅ Criatividade em funcionalidades extras.
+
+---
+
+## 📱 Contato e Redes Sociais
+
+📧 **Email:** [4dalbertosil@gmail.com](4dalbertosil@gmail.com)
+
+🔗 **GitHub:** [github.com/adalbertoao](https://github.com/adalbertoao)
+
+📷 **Instagram:** [instagram.com/adalberto-sil-oficial](https://instagram.com/adalberto-sil-oficial)
+
+💼 LinkedIn: [linkedin.com/in/adalberto-silvestre](https://linkedin.com/in/adalberto-silvestre)
+
+📢 **Dúvidas ou Sugestões?** Fique à vontade para contribuir e melhorar este projeto! 🚀⚽
+
