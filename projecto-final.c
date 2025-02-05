@@ -441,10 +441,10 @@ void menuEquipes(){
                 
             break;
             case 4:
-            int idE;
+            int idEqui;
             system("clear");
            printf("digite o id da equipe em questao: \n");
-           scanf("%d", &idE);
+           scanf("%d", &idEqui);
            system("clear");
            listarJogadoresDeUmaEquipe(idE);
             break;
@@ -613,9 +613,9 @@ void menuCampeonatos() {
             break;
             case 6:
             system("clear");
-            int idC;
+            int idCamp;
             printf("Digite o Id do campeonato em questao:\n");
-            scanf("%d", &idC);
+            scanf("%d", &idCamp);
             system("clear");
             listarPartidasDeUmCampeonato(idC);
             break;
@@ -906,7 +906,7 @@ bool cadastrar_partidas(partida p, campeonato c) {
         printf("Erro: Uma ou ambas as equipes não pertencem ao campeonato '%s'.\n", c.nome);
         return false;
     }
-    
+
     p.id = totalPartidas + 1;
     p.idCampeonato = c.id;
     p.status = false;
@@ -1439,7 +1439,7 @@ void listarJogadoresDeUmaEquipe(int idEquipe) {
 
     equipe e = v_equipes[indiceE];
     printf("\n══════════════════════════════════════════════════════════════════════════════════════════════════════\n");
-    printf("                          JOGADORES DA EQUIPE: %-30s                          \n", e.nomeEquipe);
+    printf("                          JOGADORES DA EQUIPE: %-30s                          \n", e->nomeEquipe);
     printf("══════════════════════════════════════════════════════════════════════════════════════════════════════\n");
     printf(" ID │ Nome%-25s │ Idade │ Camisa │ Posição%-15s │ Gols \n", "", "");
     printf("────┼───────────────────────────────┼───────┼────────┼─────────────────────┼───────\n");
