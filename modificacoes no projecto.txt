@@ -1,0 +1,17 @@
+
+LINGUA PORTUGUESA
+setlocale,  nao usei
+
+
+Falta a validacao de datas
+Erro ao finalizar uma partida
+Erro ao finalizar campeonato
+ 
+adicionar tabelas bonitinhas
+criar a funcao pontuacao por equipes
+consultar gols por jogador deu pau
+adicionar equipes a um campeonato
+
+fazer o listar equipes de um campeonato com placar e de partidas
+
+erro na linha 197
