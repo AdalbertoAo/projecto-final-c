@@ -366,7 +366,21 @@ int buscarPartida(int id) {
 bool validarData(const char *data) {
     int dia, mes, ano;
     if (sscanf(data, "%d/%d/%d", &dia, &mes, &ano) != 3) return false;
-    // Adicione validações específicas (ex: meses com 31 dias)
+
+    // Validação básica
+    if (ano < 1900 || ano > 2100) return false;
+    if (mes < 1 || mes > 12) return false;
+    if (dia < 1 || dia > 31) return false;
+
+    // Meses com 30 dias
+    if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) return false;
+
+    // Fevereiro
+    if (mes == 2) {
+        int bissexto = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+        if (dia > 29 || (dia == 29 && !bissexto)) return false;
+    }
+
     return true;
 }
 /*          SubMenus           */
@@ -1180,7 +1194,7 @@ bool registrarCampeoes(int indiceC, int campeao, int viceCampeao, int terceiroLu
         printf("ID do terceiro lugar não existe!\n");
         return false;
     }
-
+        campeonato *c = &v_campeonatos[indiceC];
         bool equipeValida = false;
         for (int i = 0; i < c->totalEquipes; i++) {
             if (c->equipesParticipantes[i] == campeao) equipeValida = true;
