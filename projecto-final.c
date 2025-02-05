@@ -22,7 +22,6 @@ struct JOGADOR {
     char posicao[20];
     bool status ;
     int gols;
-    
 };
 typedef struct JOGADOR jogador;
 struct EQUIPE {
