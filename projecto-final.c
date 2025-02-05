@@ -814,16 +814,45 @@ int main() {
 
 /*          CADASTROS           */
 bool cadastrar_jogador(jogador j) {
+    // Verifica se o jogador já existe
+    for (int i = 0; i < totalJogadores; i++) {
+        if (strcmp(v_jogador[i].nomeJogador, j.nomeJogador) == 0) {
+            printf("Jogador já cadastrado!\n");
+            return false;
+        }
+    }
+    if (j.numeroCamisa < 1 || j.numeroCamisa > 99) {
+        printf("Erro: O número da camisa deve estar entre 1 e 99.\n");
+        return false;
+    }
+
+    if (j.idEquipe != 0) {
+        for (int i = 0; i < totalJogadores; i++) {
+            if (v_jogador[i].idEquipe == j.idEquipe && v_jogador[i].numeroCamisa == j.numeroCamisa) {
+                printf("Erro: O número da camisa %d já está em uso na equipe.\n", j.numeroCamisa);
+                return false;
+            }
+        }
+    }
+
     j.id = totalJogadores + 1;
-    j.idEquipe= 0;
-    j.gols=0;
+    j.idEquipe = 0;
+    j.gols = 0;
     j.status = false;
     v_jogador[totalJogadores] = j;
-    totalJogadores++;   
+    totalJogadores++;
     return true;
 }
 
 bool cadastrar_equipes(equipe e){
+
+     for (int i = 0; i < totalEquipes; i++) {
+        if (strcmp(v_equipes[i].nomeEquipe, e.nomeEquipe) == 0) {
+            printf("Erro: Equipe com o nome '%s' já está cadastrada!\n", e.nomeEquipe);
+            return false;
+        }
+    }
+
   e.id = totalEquipes + 1;
   e.jogadores = 0;
     v_equipes[totalEquipes] = e;
@@ -832,6 +861,19 @@ bool cadastrar_equipes(equipe e){
 }
 
 bool cadastrar_campeonatos(campeonato c) {
+
+    for (int i = 0; i < totalCampeonatos; i++) {
+        if (strcmp(v_campeonatos[i].nome, c.nome) == 0) {
+            printf("Erro: Campeonato com o nome '%s' já está cadastrado!\n", c.nome);
+            return false;
+        }
+    }
+
+    if (c.ano < 2025 || c.ano > 2030) {
+        printf("Erro: O ano do campeonato deve estar entre 2025 e 2030.\n");
+        return false;
+    }
+
     c.id = totalCampeonatos + 1;
     c.totalEquipes = 0;
     c.campeao = 0;
@@ -846,6 +888,25 @@ bool cadastrar_campeonatos(campeonato c) {
 }
 
 bool cadastrar_partidas(partida p, campeonato c) {
+    int indiceEquipeA = buscarEquipe(p.equipesSelecionadas[0]);
+    int indiceEquipeB = buscarEquipe(p.equipesSelecionadas[1]);
+
+    if (indiceEquipeA == -1 || indiceEquipeB == -1) {
+        printf("Erro: Uma ou ambas as equipes não existem!\n");
+        return false;
+    }
+
+     bool equipeAValida = false, equipeBValida = false;
+    for (int i = 0; i < c.totalEquipes; i++) {
+        if (c.equipesParticipantes[i] == p.equipesSelecionadas[0]) equipeAValida = true;
+        if (c.equipesParticipantes[i] == p.equipesSelecionadas[1]) equipeBValida = true;
+    }
+
+    if (!equipeAValida || !equipeBValida) {
+        printf("Erro: Uma ou ambas as equipes não pertencem ao campeonato '%s'.\n", c.nome);
+        return false;
+    }
+    
     p.id = totalPartidas + 1;
     p.idCampeonato = c.id;
     p.status = false;
