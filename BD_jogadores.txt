@@ -1,40 +1,40 @@
-1;1;Adalberto Silvestre;21;22;Meio campista;1;5  
-2;2;Josue Silvestre;17;33;Ponta;1;5  
-3;4;Isaac Quessongo;22;20;Goleiro;1;0  
-4;3;Carlos Mendes;24;10;Atacante;0;15  
-5;5;Rafael Oliveira;19;11;Zagueiro;1;3  
-6;6;Gustavo Souza;28;7;Meio campista;1;20  
-7;7;Lucas Pereira;30;9;Ponta;0;7  
-8;8;Fábio Costa;25;3;Goleiro;1;5  
-9;9;André Silva;18;15;Atacante;1;0  
-10;10;Thiago Lima;26;8;Zagueiro;1;10  
-11;11;Marcelo Ribeiro;23;21;Meio campista;0;3  
-12;12;Felipe Santos;20;18;Zagueiro;1;8  
-13;13;Diego Martins;27;6;Ponta;0;2  
-14;14;Vinícius Rocha;29;4;Atacante;1;18  
-15;15;Eduardo Alves;32;12;Meio campista;1;12  
-16;16;João Pedro Silva;19;16;Goleiro;0;0  
-17;17;Fernando Souza;24;2;Zagueiro;1;1  
-18;18;Júnior Oliveira;31;17;Ponta;1;9  
-19;19;Ricardo Costa;22;5;Atacante;1;8  
-20;20;Daniel Pereira;23;23;Meio campista;0;11  
-21;1;Tiago Oliveira;25;16;Atacante;1;5  
-22;1;Felipe Costa;22;22;Zagueiro;1;7  
-23;1;Vinícius Souza;24;19;Meio campista;1;2  
-24;1;Gabriel Lima;23;14;Ponta;1;9  
-25;1;Marcos Silva;21;10;Goleiro;1;3  
-26;2;Ricardo Barbosa;19;13;Zagueiro;0;1  
-27;2;Lucas Costa;28;18;Meio campista;1;0  
-28;2;Eduardo Rocha;26;5;Atacante;1;2  
-29;2;Joaquim Souza;27;21;Ponta;0;6  
-30;2;Alexandre Alves;20;11;Meio campista;1;4  
-31;3;Ronaldo Santos;23;9;Goleiro;1;3  
-32;3;Felipe Oliveira;29;8;Atacante;1;7  
-33;3;Anderson Lima;25;16;Zagueiro;0;5  
-34;3;Marcos Vinícius;21;7;Meio campista;1;8  
-35;4;Daniel Souza;30;10;Atacante;1;6  
-36;4;Paulo Henrique;23;6;Zagueiro;0;3  
-37;4;João Gabriel;22;15;Ponta;1;0  
-38;4;José Martins;24;17;Meio campista;1;10  
-39;5;Juliano Costa;28;12;Atacante;0;2  
-40;5;Ricardo Silva;25;14;Meio campista;1;1  
+1;1;Adalberto Silvestre;21;22;Meio campista;1;5
+2;2;Josue Silvestre;17;33;Ponta;1;5
+3;4;Isaac Quessongo;22;20;Goleiro;1;0
+4;3;Carlos Mendes;24;10;Atacante;0;15
+5;5;Rafael Oliveira;19;11;Zagueiro;1;3
+6;6;Gustavo Souza;28;7;Meio campista;1;20
+7;7;Lucas Pereira;30;9;Ponta;0;7
+8;8;Fábio Costa;25;3;Goleiro;1;5
+9;9;André Silva;18;15;Atacante;1;0
+10;10;Thiago Lima;26;8;Zagueiro;1;10
+11;11;Marcelo Ribeiro;23;21;Meio campista;0;3
+12;12;Felipe Santos;20;18;Zagueiro;1;8
+13;13;Diego Martins;27;6;Ponta;0;2
+14;14;Vinícius Rocha;29;4;Atacante;1;18
+15;15;Eduardo Alves;32;12;Meio campista;1;12
+16;16;João Pedro Silva;19;16;Goleiro;0;0
+17;17;Fernando Souza;24;2;Zagueiro;1;1
+18;18;Júnior Oliveira;31;17;Ponta;1;9
+19;19;Ricardo Costa;22;5;Atacante;1;8
+20;20;Daniel Pereira;23;23;Meio campista;0;11
+21;1;Tiago Oliveira;25;16;Atacante;1;5
+22;1;Felipe Costa;22;22;Zagueiro;1;7
+23;1;Vinícius Souza;24;19;Meio campista;1;2
+24;1;Gabriel Lima;23;14;Ponta;1;9
+25;1;Marcos Silva;21;10;Goleiro;1;3
+26;2;Ricardo Barbosa;19;13;Zagueiro;0;1
+27;2;Lucas Costa;28;18;Meio campista;1;0
+28;2;Eduardo Rocha;26;5;Atacante;1;2
+29;2;Joaquim Souza;27;21;Ponta;0;6
+30;2;Alexandre Alves;20;11;Meio campista;1;4
+31;3;Ronaldo Santos;23;9;Goleiro;1;3
+32;3;Felipe Oliveira;29;8;Atacante;1;7
+33;3;Anderson Lima;25;16;Zagueiro;0;5
+34;3;Marcos Vinícius;21;7;Meio campista;1;8
+35;4;Daniel Souza;30;10;Atacante;1;6
+36;4;Paulo Henrique;23;6;Zagueiro;0;3
+37;4;João Gabriel;22;15;Ponta;1;0
+38;4;José Martins;24;17;Meio campista;1;10
+39;5;Juliano Costa;28;12;Atacante;0;2
+40;5;Ricardo Silva;25;14;Meio campista;1;1
